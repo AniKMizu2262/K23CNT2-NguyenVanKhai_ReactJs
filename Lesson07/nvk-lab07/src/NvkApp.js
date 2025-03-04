@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NvkLoginControl from './components/NvkLoginControl'
 import NvkRenderList from './components/NvkRenderList'
 import NvkRenderListStudent from './components/NvkRenderListStudent'
+import NvkRenderListPhone from './components/NvkRenderListPhone'
 
 export default class NvkApp extends Component {
   render() {
@@ -15,6 +16,8 @@ export default class NvkApp extends Component {
           <NvkRenderList />
 
           <NvkRenderListStudent />
+
+          <NvkRenderListPhone />
         </div>
       </div>
     )
