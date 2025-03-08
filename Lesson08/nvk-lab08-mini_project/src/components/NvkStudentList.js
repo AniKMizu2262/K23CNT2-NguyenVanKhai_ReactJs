@@ -14,6 +14,12 @@ export default class NvkStudentList extends Component {
         this.props.onNvkHandleDelete(nvkID);
     };
 
+    // Hàm xử lý chuyển sang chế độ sửa
+    nvkHandleEditMode = (nvkStudent) => {
+        // Chuyển dữ liệu lên NvkApp
+        this.props.onNvkHandleEditMode(nvkStudent);
+    };
+
     render() {
         // Lấy dữ liệu từ props từ NvkApp chuyển xuống 
         let { renderNvkStudents } = this.props;
@@ -26,6 +32,7 @@ export default class NvkStudentList extends Component {
                         renderNvkStudent={nvkItem} 
                         onNvkHandleView={this.nvkHandleView} 
                         onNvkHandleDelete={this.nvkHandleDelete} 
+                        onNvkHandleEditMode={this.nvkHandleEditMode}
                     />
         });
         return (

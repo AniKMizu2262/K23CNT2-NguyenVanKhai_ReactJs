@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NvkControl from './components/NvkControl'
 import NvkStudentList from './components/NvkStudentList'
 import NvkForm from './components/NvkForm'
-// import NvkStudent from './components/NvkStudent'
 
 export default class NvkApp extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ export default class NvkApp extends Component {
         { nvkID: 'SV004', nvkName: 'Nguyễn Văn D', nvkAge: 23, nvkGender: 'Nam', nvkBirthday: '04/04/2000', nvkBirthPlace: 'Hà Nội', nvkAddress: '323 Kim Ma' },
       ],
       nvkStudent: {},
+      isEdit: false, // Biến để kiểm tra trạng thái sửa
     }
   }
 
@@ -22,6 +22,7 @@ export default class NvkApp extends Component {
   nvkHandleView = (nvkStudent) => {
     this.setState({
       nvkStudent: nvkStudent,
+      isEdit: false,
     })
   }
 
@@ -29,6 +30,30 @@ export default class NvkApp extends Component {
   nvkHandleDelete = (nvkID) => {
     this.setState({
       nvkStudents: this.state.nvkStudents.filter(student => student.nvkID !== nvkID)
+    })
+  }
+
+  // Hàm xử lí sự kiện thêm mới sinh viên
+  nvkHandleAdd = (newStudent) => {
+    this.setState({
+      nvkStudents: [...this.state.nvkStudents, newStudent]
+    })
+  }
+
+  // Hàm xử lí sự kiện sửa sinh viên
+  nvkHandleEdit = (editedStudent) => {
+    this.setState({
+      nvkStudents: this.state.nvkStudents.map(student => student.nvkID === editedStudent.nvkID ? editedStudent : student),
+      isEdit: false,
+      nvkStudent: {},
+    })
+  }
+
+  // Hàm xử lí chuyển sang chế độ sửa
+  nvkHandleEditMode = (nvkStudent) => {
+    this.setState({
+      nvkStudent: nvkStudent,
+      isEdit: true,
     })
   }
 
@@ -43,21 +68,26 @@ export default class NvkApp extends Component {
             <div className="card">
 
               {/*header */}
-              <NvkControl />
+              <NvkControl onNvkHandleAdd={this.nvkHandleAdd} />
               {/*Danh sách SV */}
               <NvkStudentList 
                 renderNvkStudents={this.state.nvkStudents} 
                 onNvkHandleView={this.nvkHandleView} 
                 onNvkHandleDelete={this.nvkHandleDelete} 
+                onNvkHandleEditMode={this.nvkHandleEditMode}
               />
             </div>
           </div>
           <div className="col-5 grid-margin">
             {/*Form */}
-            <NvkForm renderNvkStudent={this.state.nvkStudent} />
+            <NvkForm 
+              renderNvkStudent={this.state.nvkStudent} 
+              isEdit={this.state.isEdit} 
+              onNvkHandleAdd={this.nvkHandleAdd} 
+              onNvkHandleEdit={this.nvkHandleEdit} 
+            />
           </div>
         </div>
-
       </div>
     )
   }

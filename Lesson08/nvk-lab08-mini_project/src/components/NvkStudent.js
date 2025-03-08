@@ -14,6 +14,12 @@ export default class NvkStudent extends Component {
         this.props.onNvkHandleDelete(nvkID);
     }
 
+    // Hàm xử lý chuyển sang chế độ sửa
+    nvkHandleEdit = (nvkStudent) => {
+        // Chuyển lên NvkStudentList
+        this.props.onNvkHandleEditMode(nvkStudent);
+    }
+
     render() {
         // Lấy đối tượng dữ liệu từ NvkStudentList
         let { renderNvkStudent } = this.props;
@@ -41,6 +47,7 @@ export default class NvkStudent extends Component {
                             <button
                                 type="button"
                                 className="btn btn-warning btn-icon-text"
+                                onClick={() => this.nvkHandleEdit(renderNvkStudent)}
                             >
                                 Sửa
                             </button>
