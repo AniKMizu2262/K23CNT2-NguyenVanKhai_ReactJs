@@ -11,9 +11,9 @@ import NvkProductForm from './components/NvkProductForm'
 export default function NvkApp() {
 
   const initialProducts = [
-    {ID: "P001", name: "Sản phẩm 1", price: 100000, quantity: 10},
-    {ID: "P002", name: "Sản phẩm 2", price: 200000, quantity: 20},
-    {ID: "P003", name: "Sản phẩm 3", price: 300000, quantity: 30},
+    {NvkID: "P001", NvkName: "Sản phẩm 1", NvkPrice: 100000, NvkQuantity: 10},
+    {NvkID: "P002", NvkName: "Sản phẩm 2", NvkPrice: 200000, NvkQuantity: 20},
+    {NvkID: "P003", NvkName: "Sản phẩm 3", NvkPrice: 300000, NvkQuantity: 30},
   ]
 
   const [products, setProducts] = useState(initialProducts)
