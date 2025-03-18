@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "fullname": "Nguyễn Văn Khải",
+            "age": "21",
+            "class": "K23CNT2"
+        },
+        {
+            "fullname": "Nguyễn Minh Nhật",
+            "age": "19",
+            "class": "K23CNT1"
+        },
+        {
+            "fullname": "Nguyễn Văn Hùng",
+            "age": "20",
+            "class": "K23CNT2"
+        }
+    ],
+    "students": [
+        {
+            "studentID": "SV001",
+            "fullname": "Nguyễn Văn Khải"
+        }
+    ]
+}
