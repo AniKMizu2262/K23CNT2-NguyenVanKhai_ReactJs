@@ -3,13 +3,13 @@ import axios from 'axios';
 
 export function NvkEditUser({ userId, onUpdate, onCancel }) {
     const [user, setUser] = useState({ nvkName: '', nvkEmail: '', nvkPhone: '', nvkActive: false });
-    const apiURL = `https://67d90ec200348dd3e2a93e15.mockapi.io/k23cnt2_nguyenvankhai/nvk_users${userId}`;
+    const apiURL = `https://67d90ec200348dd3e2a93e15.mockapi.io/k23cnt2_nguyenvankhai/nvk_users/${userId}`;
 
     useEffect(() => {
         axios.get(apiURL)
             .then(response => setUser(response.data))
             .catch(error => console.error('Error fetching user:', error));
-    }, [userId]);
+    }, [apiURL]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
