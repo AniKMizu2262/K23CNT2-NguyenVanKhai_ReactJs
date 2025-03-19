@@ -13,7 +13,7 @@ export function NvkEditUser({ userId, onUpdate, onCancel }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser(prevState => ({ ...prevState, [name]: value }));
+        setUser(prevState => ({ ...prevState, [name]: name === 'nvkActive' ? value === 'true' : value }));
     };
 
     const handleSubmit = (e) => {
