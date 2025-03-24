@@ -2,14 +2,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react'
 
-
 export default function NvkCreateUser() {
     const nvkUser = {
         id: 0,
         'nvk_name': '',
         'nvk_email': '',
         'nvk_phone': '',
-        'nvk_active': '' 
+        'nvk_active': false 
     }
 
     const [nvk_user, setNvk_User] = useState(nvkUser);
@@ -70,8 +69,8 @@ export default function NvkCreateUser() {
                         <select
                             id="nvk_active"
                             className="form-control"
-                            value={nvk_user.nvk_active}
-                            onChange={(ev) => setNvk_User({ ...nvk_user, nvk_active: ev.target.value })}
+                            value={nvk_user.nvk_active.toString()}
+                            onChange={(ev) => setNvk_User({ ...nvk_user, nvk_active: ev.target.value === 'true' })}
                         >
                             <option value="">-- Select Status --</option>
                             <option value="true">Hoạt động</option>

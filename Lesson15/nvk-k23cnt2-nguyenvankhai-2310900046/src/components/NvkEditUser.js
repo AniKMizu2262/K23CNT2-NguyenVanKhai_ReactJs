@@ -8,7 +8,7 @@ export default function NvkEditUser() {
     'nvk_name': '',
     'nvk_email': '',
     'nvk_phone': '',
-    'nvk_active': ''
+    'nvk_active': false
   }
 
   const [nvk_user, setNvk_User] = useState(nvkUser);
@@ -17,25 +17,32 @@ export default function NvkEditUser() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(nvkApi + "/" + id)
+    axios.get(`${nvkApi}/${id}`)
       .then(nvkResponse => {
-        console.log(nvkResponse.data);
-        setNvk_User(nvkResponse.data);
+        const userData = nvkResponse.data;
+        userData.nvk_active = userData.nvk_active === "true" || userData.nvk_active === true; // Chuyển đổi giá trị chuỗi thành boolean
+        setNvk_User(userData);
       })
       .catch(error => {
         console.error('Lỗi : ', error);
       });
   }, [id]);
+
   const navigate = useNavigate();
+
   const nvkHandleSubmit = (ev) => {
     ev.preventDefault();
-    console.log(nvk_user);
+    const updatedUser = { ...nvk_user, nvk_active: nvk_user.nvk_active.toString() }; // Chuyển đổi giá trị boolean thành chuỗi
+    console.log(updatedUser);
     axios
-      .put(nvkApi + "/" + id, nvk_user)
+      .put(`${nvkApi}/${id}`, updatedUser)
       .then(() => {
         alert('Cập nhật thành công');
         navigate('/nvk-list-user');
       })
+      .catch(error => {
+        console.error('Lỗi : ', error);
+      });
   };
 
   const nvkHandleBack = (ev) => {
@@ -86,8 +93,8 @@ export default function NvkEditUser() {
             <select
               id="nvk_active"
               className="form-control"
-              value={nvk_user.nvk_active}
-              onChange={(ev) => setNvk_User({ ...nvk_user, nvk_active: ev.target.value })}
+              value={nvk_user.nvk_active ? "true" : "false"} // Hiển thị giá trị boolean dưới dạng chuỗi
+              onChange={(ev) => setNvk_User({ ...nvk_user, nvk_active: ev.target.value === 'true' })}
             >
               <option value="">-- Select Status --</option>
               <option value="true">Hoạt động</option>
